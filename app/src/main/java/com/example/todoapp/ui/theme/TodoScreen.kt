@@ -19,7 +19,10 @@ import com.example.todoapp.ui.theme.TodoItem
 fun TodoScreen(vm: TodoViewModel = viewModel()) {
     val filter by vm.filter.collectAsState()
     val searchQuery by vm.searchQuery.collectAsState()
-    val filteredTodos = vm.getFilteredTodos()
+    val todos by vm.todos.collectAsState()
+    val filteredTodos = remember(todos, filter, searchQuery) {
+        vm.getFilteredTodos()
+    }
 
     var text by rememberSaveable { mutableStateOf("") }
     var menuTerbuka by rememberSaveable { mutableStateOf(false) }
@@ -113,8 +116,6 @@ fun TodoScreen(vm: TodoViewModel = viewModel()) {
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier.padding(vertical = 8.dp)
             )
-
-            Divider(Modifier.padding(vertical = 8.dp))
 
             Divider(Modifier.padding(vertical = 8.dp))
 

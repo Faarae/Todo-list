@@ -26,11 +26,13 @@ fun TodoItem(
             .fillMaxWidth()
             .padding(8.dp)
             .background(Color(0xFFF6F6F6))
-            .clickable { onToggle() }
             .padding(12.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Checkbox(checked = todo.isDone, onCheckedChange = { onToggle() })
+        Checkbox(
+            checked = todo.isDone,
+            onCheckedChange = { checked -> onToggle() }
+        )
         Spacer(Modifier.width(8.dp))
         Text(
             text = todo.title,

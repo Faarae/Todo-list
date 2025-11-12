@@ -1,16 +1,18 @@
 package com.example.todoapp.viewmodel
 
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import com.example.todoapp.model.Todo
+import kotlinx.coroutines.flow.asStateFlow
 
 enum class FilterType { ALL, ACTIVE, DONE }
 
 class TodoViewModel : ViewModel() {
 
     private val _todos = MutableStateFlow<List<Todo>>(emptyList())
-    val todos: StateFlow<List<Todo>> = _todos
+    val todos = _todos.asStateFlow()
 
     private val _filter = MutableStateFlow(FilterType.ALL)
     val filter: StateFlow<FilterType> = _filter
